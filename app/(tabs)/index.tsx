@@ -3,13 +3,65 @@ import {
   Text,
   StyleSheet,
   ScrollView,
+  FlatList,
+  Dimensions,
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRef, useState, useEffect } from "react";
+
+const { width } = Dimensions.get("window");
+
+const notices = [
+  {
+    title: "System Upgrade",
+    content: "Our platform will undergo maintenance tonight from 11PM.",
+    date: "17 Feb 2026",
+    time: "09:45 AM",
+  },
+  {
+    title: "Loan Offer",
+    content: "You are pre-approved for a personal loan up to KES 50,000.",
+    date: "16 Feb 2026",
+    time: "02:10 PM",
+  },
+  {
+    title: "New Feature",
+    content: "Investments section now supports treasury bonds.",
+    date: "15 Feb 2026",
+    time: "11:30 AM",
+  },
+  {
+    title: "Security Alert",
+    content: "Never share your PIN with anyone for safety reasons.",
+    date: "14 Feb 2026",
+    time: "08:15 AM",
+  },
+  {
+    title: "Cashback Reward",
+    content: "Earn 5% cashback when paying bills this week.",
+    date: "13 Feb 2026",
+    time: "04:20 PM",
+  },
+];
 
 export default function HomeScreen() {
+  const flatListRef = useRef<FlatList>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Auto scroll every 2 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const nextIndex = (currentIndex + 1) % notices.length;
+      flatListRef.current?.scrollToIndex({ index: nextIndex, animated: true });
+      setCurrentIndex(nextIndex);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [currentIndex]);
+
   return (
     <LinearGradient
       colors={["#0B3D2E", "#ffffff"]}
@@ -85,51 +137,51 @@ export default function HomeScreen() {
           <View style={styles.noticeSection}>
             <Text style={styles.sectionTitle}>Latest Notices</Text>
 
-            {[
-              {
-                title: "System Upgrade",
-                content:
-                  "Our platform will undergo maintenance tonight from 11PM.",
-                date: "17 Feb 2026",
-                time: "09:45 AM",
-              },
-              {
-                title: "Loan Offer",
-                content:
-                  "You are pre-approved for a personal loan up to KES 50,000.",
-                date: "16 Feb 2026",
-                time: "02:10 PM",
-              },
-              {
-                title: "New Feature",
-                content: "Investments section now supports treasury bonds.",
-                date: "15 Feb 2026",
-                time: "11:30 AM",
-              },
-              {
-                title: "Security Alert",
-                content: "Never share your PIN with anyone for safety reasons.",
-                date: "14 Feb 2026",
-                time: "08:15 AM",
-              },
-              {
-                title: "Cashback Reward",
-                content: "Earn 5% cashback when paying bills this week.",
-                date: "13 Feb 2026",
-                time: "04:20 PM",
-              },
-            ].map((notice, index) => (
-              <View key={index} style={styles.noticeCard}>
-                <View style={styles.noticeHeader}>
-                  <Text style={styles.noticeTitle}>{notice.title}</Text>
-                  <Text style={styles.noticeDate}>
-                    {notice.date} • {notice.time}
-                  </Text>
+            <FlatList
+              ref={flatListRef}
+              data={notices}
+              keyExtractor={(_, index) => index.toString()}
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              onMomentumScrollEnd={(event) => {
+                const index = Math.round(
+                  event.nativeEvent.contentOffset.x / width,
+                );
+                setCurrentIndex(index);
+              }}
+              renderItem={({ item }) => (
+                <View
+                  style={[
+                    styles.noticeCard,
+                    { width: width - 40, marginRight: 10 },
+                  ]}
+                >
+                  <View style={styles.noticeHeader}>
+                    <Text style={styles.noticeTitle}>{item.title}</Text>
+                    <Text style={styles.noticeDate}>
+                      {item.date} • {item.time}
+                    </Text>
+                  </View>
+                  <Text style={styles.noticeContent}>{item.content}</Text>
                 </View>
+              )}
+            />
 
-                <Text style={styles.noticeContent}>{notice.content}</Text>
-              </View>
-            ))}
+            {/* Dots */}
+            <View style={styles.dotsContainer}>
+              {notices.map((_, i) => (
+                <View
+                  key={i}
+                  style={[
+                    styles.dot,
+                    {
+                      backgroundColor: i === currentIndex ? "#2E7D32" : "#ccc",
+                    },
+                  ]}
+                />
+              ))}
+            </View>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -300,5 +352,18 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 10,
     fontWeight: "bold",
+  },
+
+  dotsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 10,
+  },
+
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 4,
   },
 });
