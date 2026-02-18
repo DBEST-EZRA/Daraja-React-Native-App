@@ -39,11 +39,11 @@ export default function TabLayout() {
 
       {/* SEND */}
       <Tabs.Screen
-        name="send"
+        name="notes"
         options={{
-          title: "Send",
+          title: "Notes",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="arrow-up" size={size} color={color} />
+            <Ionicons name="clipboard-outline" size={size} color={color} />
           ),
         }}
       />
@@ -52,9 +52,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="bills"
         options={{
-          title: "Bills",
+          title: "Live",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="receipt-outline" size={size} color={color} />
+            <Ionicons name="wifi-outline" size={size} color={color} />
           ),
         }}
       />
@@ -63,20 +63,20 @@ export default function TabLayout() {
       <Tabs.Screen
         name="loans"
         options={{
-          title: "Loans",
+          title: "Library",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cash-outline" size={size} color={color} />
+            <Ionicons name="book-outline" size={size} color={color} />
           ),
         }}
       />
 
       {/* INVEST */}
       <Tabs.Screen
-        name="invest"
+        name="account"
         options={{
-          title: "Invest",
+          title: "Account",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="briefcase-outline" size={size} color={color} />
+            <Ionicons name="person-outline" size={size} color={color} />
           ),
         }}
       />

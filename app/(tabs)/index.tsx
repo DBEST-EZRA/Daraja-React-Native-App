@@ -47,6 +47,49 @@ const notices = [
   },
 ];
 
+const quickActions = [
+  {
+    label: "Attendance",
+    icon: "checkmark-done-outline",
+    color: "#4CAF50",
+  },
+  {
+    label: "Sermons",
+    icon: "mic-outline",
+    color: "#3F51B5",
+  },
+  {
+    label: "Devotionals",
+    icon: "book-outline",
+    color: "#FF9800",
+  },
+  {
+    label: "Tithe/Offering",
+    icon: "wallet-outline",
+    color: "#2E7D32",
+  },
+  {
+    label: "Events",
+    icon: "calendar-outline",
+    color: "#E91E63",
+  },
+  {
+    label: "Contributions",
+    icon: "card-outline",
+    color: "#009688",
+  },
+  {
+    label: "Appointment",
+    icon: "time-outline",
+    color: "#9C27B0",
+  },
+  {
+    label: "Registration",
+    icon: "person-add-outline",
+    color: "#607D8B",
+  },
+];
+
 export default function HomeScreen() {
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -65,7 +108,7 @@ export default function HomeScreen() {
   return (
     <LinearGradient
       colors={["#0B3D2E", "#ffffff"]}
-      locations={[0.4, 0.9]}
+      locations={[0.4, 0.7]}
       style={styles.container}
     >
       <SafeAreaView style={{ flex: 1 }}>
@@ -113,21 +156,14 @@ export default function HomeScreen() {
             <Text style={styles.sectionTitle}>Quick Actions</Text>
 
             <View style={styles.grid}>
-              {[
-                "Send",
-                "Withdraw",
-                "Pay Till",
-                "E-citizen",
-                "Buy Tokens",
-                "Mpesa Bank",
-                "Buy Airtime",
-                "Remit",
-              ].map((item, index) => (
+              {quickActions.map((item, index) => (
                 <TouchableOpacity key={index} style={styles.actionItem}>
-                  <View style={styles.circle}>
-                    <Ionicons name="wallet-outline" size={22} color="#fff" />
+                  <View
+                    style={[styles.circle, { backgroundColor: item.color }]}
+                  >
+                    <Ionicons name={item.icon as any} size={22} color="#fff" />
                   </View>
-                  <Text style={styles.actionText}>{item}</Text>
+                  <Text style={styles.actionText}>{item.label}</Text>
                 </TouchableOpacity>
               ))}
             </View>
