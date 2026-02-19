@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 export default function LoansScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Loans Screen</Text>
+      <Text style={styles.text}>Library Screen</Text>
     </View>
   );
 }

@@ -125,6 +125,7 @@ export default function NotesScreen() {
       </TouchableOpacity>
 
       {/* Add/Edit Modal */}
+      {/* include horizontal lines */}
       <Modal visible={modalVisible} animationType="slide">
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>
@@ -164,6 +165,7 @@ export default function NotesScreen() {
       </Modal>
 
       {/* View Full Note Modal */}
+      {/* Make scrollable when note content is long */}
       <Modal visible={viewModalVisible} animationType="slide">
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>{editingNote?.topic}</Text>
