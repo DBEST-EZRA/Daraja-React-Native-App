@@ -267,8 +267,8 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
     fontSize: 16,
     lineHeight: 28,
-    borderLeftWidth: 3,
-    borderLeftColor: "#0B3D2E",
+    borderBottomWidth: 3,
+    borderBottomColor: "#0B3D2E",
     paddingLeft: 10,
   },
 
