@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   },
 
   notePreview: {
-    color: "#444",
+    color: "#504c4c",
   },
 
   actions: {
