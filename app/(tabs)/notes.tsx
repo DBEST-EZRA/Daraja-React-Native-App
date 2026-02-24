@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   },
 
   addText: {
-    color: "#ffffff",
+    color: "#fff",
     fontSize: 30,
   },
 
