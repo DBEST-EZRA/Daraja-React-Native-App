@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
   },
 
   saveText: {
-    color: "#ffffff",
+    color: "#fff",
     fontWeight: "700",
     fontSize: 16,
   },
