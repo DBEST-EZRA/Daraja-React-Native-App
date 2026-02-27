@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
 
   fullContent: {
     fontSize: 16,
-    lineHeight: 26,
+    lineHeight: 25,
     marginTop: 10,
   },
 });
