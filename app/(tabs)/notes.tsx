@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
   cancel: {
     textAlign: "center",
     marginTop: 15,
-    color: "#777",
+    color: "#888787",
   },
 
   fullContent: {
